@@ -65,15 +65,6 @@ export const ResponsiveWrapper = styled.div`
   }
 `;
 
-export const StyledLogo = styled.img`
-  width: 500px;
-  @media (min-width: 767px) {
-    width: 800px;
-  }
-  transition: width 0.5s;
-  transition: height 0.5s;
-`;
-
 export const StyledImg = styled.img`
   box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
   border: 4px dashed var(--secondary);
@@ -201,12 +192,8 @@ function App() {
         style={{ padding: 24, backgroundColor: "var(--primary)" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
-        <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"example"} src={"/config/images/example.png"} />
-          </s.Container>
           <s.SpacerLarge />
           <s.Container
             flex={2}
@@ -270,7 +257,7 @@ function App() {
                 <s.SpacerSmall />
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
-                  <s.Container ai={"center"} jc={"center"}>
+                  <s.AltContainer ai={"center"} jc={"center"}>
                     <s.TextDescription
                       style={{
                         textAlign: "center",
@@ -302,7 +289,7 @@ function App() {
                         </s.TextDescription>
                       </>
                     ) : null}
-                  </s.Container>
+                  </s.AltContainer>
                 ) : (
                   <>
                     <s.TextDescription
@@ -365,34 +352,8 @@ function App() {
             <s.SpacerMedium />
           </s.Container>
           <s.SpacerLarge />
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg
-              alt={"example"}
-              src={"/config/images/example.png"}
-              style={{ transform: "scaleX(-1)" }}
-            />
-          </s.Container>
         </ResponsiveWrapper>
         <s.SpacerMedium />
-        <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-            Please make sure you are connected to the right network (
-            {CONFIG.NETWORK.NAME} Mainnet) and the correct address.
-          </s.TextDescription>
-          <s.SpacerSmall />
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          >
-          </s.TextDescription>
-        </s.Container>
       </s.Container>
     </s.Screen>
   );

@@ -2,14 +2,10 @@ import styled from "styled-components";
 
 // Used for wrapping a page component
 export const Screen = styled.div`
-  background-color: var(--primary);
-  background-image: ${({ image }) => (image ? `url(${image})` : "none")};
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+    height: 95vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 // Used for providing space between components
@@ -32,22 +28,56 @@ export const SpacerMedium = styled.div`
 
 // Used for providing space between components
 export const SpacerLarge = styled.div`
-  height: 32px;
+  height:35%;
   width: 32px;
 `;
 
 // Used for providing a wrapper around a component
-export const Container = styled.div`
-  display: flex;
-  flex: ${({ flex }) => (flex ? flex : 0)};
-  flex-direction: ${({ fd }) => (fd ? fd : "column")};
-  justify-content: ${({ jc }) => (jc ? jc : "flex-start")};
-  align-items: ${({ ai }) => (ai ? ai : "flex-start")};
-  background-color: var(--accent);
-  width: 100%;
-  background-image: ${({ image }) => (image ? `url(${image})` : "none")};
-  background-size: cover;
-  background-position: center;
+export const MainContainer = styled.div`
+    background-color: var(--accent);
+    margin: auto;
+    width: 19%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+`;
+
+export const MintButtonContainer = styled.div`
+    margin: auto;
+    width: 27%;
+    height: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+`;
+
+export const MintAmtContainer = styled.div`
+    margin: auto;
+    width: 50%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    text-align: center;
+`;
+
+export const BgContainer = styled.div`
+    height: 105vh;
+    min-width: 100%;
+    background-image: ${({ image }) => (image ? `url(${image})` : "none")};
+    background-color: var(--accent);
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
 `;
 
 export const AltContainer = styled.div`
@@ -57,14 +87,13 @@ export const AltContainer = styled.div`
   justify-content: ${({ jc }) => (jc ? jc : "flex-start")};
   align-items: ${({ ai }) => (ai ? ai : "flex-start")};
   width: 100%;
-  background-image: ${({ image }) => (image ? `url(${image})` : "none")};
   background-size: cover;
   background-position: center;
 `;
 
 export const TextTitle = styled.p`
   color: var(--primary-text);
-  font-size: 22px;
+  font-size: 30px;
   font-weight: 500;
   line-height: 1.6;
 `;
@@ -77,7 +106,13 @@ export const TextSubTitle = styled.p`
 
 export const TextDescription = styled.p`
   color: var(--primary-text);
-  font-size: 16px;
+  font-size: 24px;
+  line-height: 1.6;
+`;
+
+export const MintAmtTextDescription = styled.p`
+  color: var(--primary-text);
+  font-size: 36px;
   line-height: 1.6;
 `;
 

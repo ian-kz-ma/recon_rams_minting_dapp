@@ -12,11 +12,12 @@ export const StyledButton = styled.button`
   padding: 10px;
   border-radius: 0px;
   border: none;
-  background-color: var(--secondary);
+  background-color: var(--primary);
   padding: 10px;
   font-weight: bold;
-  color: var(--secondary-text);
+  color: var(--primary-text);
   width: 100px;
+  height: 50px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -37,8 +38,8 @@ export const StyledRoundButton = styled.button`
   font-weight: bold;
   font-size: 15px;
   color: var(--primary-text);
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -108,7 +109,7 @@ function App() {
     GAS_LIMIT: 0,
     MARKETPLACE: "",
     MARKETPLACE_LINK: "",
-    SHOW_BACKGROUND: false,
+    SHOW_BACKGROUND: true,
   });
 
   const claimNFTs = () => {
@@ -153,8 +154,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
+    if (newMintAmount > 2) {
+      newMintAmount = 2;
     }
     setMintAmount(newMintAmount);
   };
@@ -186,27 +187,13 @@ function App() {
 
   return (
     <s.Screen>
-      <s.Container
-        flex={1}
-        ai={"center"}
-        style={{ padding: 24, backgroundColor: "var(--primary)" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
+      <s.BgContainer
+        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
       >
         <s.SpacerSmall />
-        <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.SpacerLarge />
-          <s.Container
-            flex={2}
-            jc={"center"}
-            ai={"center"}
-            style={{
-              backgroundColor: "var(--accent)",
-              padding: 24,
-              borderRadius: 24,
-              border: "4px dashed var(--secondary)",
-              boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
-            }}
-          >
+          <s.MainContainer>
+            <s.SpacerSmall />
             <s.TextTitle
               style={{
                 textAlign: "center",
@@ -215,7 +202,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+              {data.totalSupply + 1000} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
@@ -223,11 +210,7 @@ function App() {
                 color: "var(--primary-text)",
               }}
             >
-              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
-              </StyledLink>
             </s.TextDescription>
-            <s.SpacerSmall />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
                 <s.TextTitle
@@ -250,11 +233,9 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  COST: {CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL} per Recon Ram.
+                  COST PER: {CONFIG.DISPLAY_COST}{" "}
+                  {CONFIG.NETWORK.SYMBOL}
                 </s.TextTitle>
-                <s.SpacerXSmall />
-                <s.SpacerSmall />
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.AltContainer ai={"center"} jc={"center"}>
@@ -264,9 +245,9 @@ function App() {
                         color: "var(--accent-text)",
                       }}
                     >
-                      Connect to the {CONFIG.NETWORK.NAME} network
+                      Connect to the {CONFIG.NETWORK.NAME} Mainnet network
                     </s.TextDescription>
-                    <s.SpacerSmall />
+                    <s.SpacerMedium />
                     <StyledButton
                       onClick={(e) => {
                         e.preventDefault();
@@ -292,16 +273,8 @@ function App() {
                   </s.AltContainer>
                 ) : (
                   <>
-                    <s.TextDescription
-                      style={{
-                        textAlign: "center",
-                        color: "var(--accent-text)",
-                      }}
-                    >
-                      {feedback}
-                    </s.TextDescription>
                     <s.SpacerMedium />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                    <s.MintAmtContainer ai={"center"} jc={"center"} fd={"row"}>
                       <StyledRoundButton
                         style={{ lineHeight: 0.4 }}
                         disabled={claimingNft ? 1 : 0}
@@ -313,14 +286,14 @@ function App() {
                         -
                       </StyledRoundButton>
                       <s.SpacerMedium />
-                      <s.TextDescription
+                      <s.MintAmtTextDescription
                         style={{
                           textAlign: "center",
                           color: "var(--accent-text)",
                         }}
                       >
                         {mintAmount}
-                      </s.TextDescription>
+                      </s.MintAmtTextDescription>
                       <s.SpacerMedium />
                       <StyledRoundButton
                         disabled={claimingNft ? 1 : 0}
@@ -331,9 +304,8 @@ function App() {
                       >
                         +
                       </StyledRoundButton>
-                    </s.Container>
-                    <s.SpacerSmall />
-                    <s.Container ai={"center"} jc={"center"} fd={"row"}>
+                    </s.MintAmtContainer>
+                    <s.MintButtonContainer ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
@@ -344,17 +316,15 @@ function App() {
                       >
                         {claimingNft ? "BUSY" : "BUY"}
                       </StyledButton>
-                    </s.Container>
+                    </s.MintButtonContainer>
                   </>
                 )}
               </>
             )}
             <s.SpacerMedium />
-          </s.Container>
-          <s.SpacerLarge />
-        </ResponsiveWrapper>
+          </s.MainContainer>
         <s.SpacerMedium />
-      </s.Container>
+      </s.BgContainer>
     </s.Screen>
   );
 }

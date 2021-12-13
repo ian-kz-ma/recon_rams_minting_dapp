@@ -8,7 +8,7 @@
   },
   "NFT_NAME": "Recon Rams",
   "SYMBOL": "ram",
-  "MAX_SUPPLY": 1,
+  "MAX_SUPPLY": 5998,
   "WEI_COST": 65000000000000000,
   "DISPLAY_COST": 0.065,
   "GAS_LIMIT": 285000,

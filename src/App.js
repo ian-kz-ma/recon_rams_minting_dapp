@@ -84,6 +84,7 @@ export const StyledImg = styled.img`
 export const StyledLink = styled.a`
   color: var(--secondary);
   text-decoration: none;
+  font-size: 30px;
 `;
 
 function App() {
@@ -94,21 +95,21 @@ function App() {
   const [feedback, setFeedback] = useState(`Select the amount of Recon Rams to mint:`);
   const [mintAmount, setMintAmount] = useState(1);
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "",
-    SCAN_LINK: "",
+    CONTRACT_ADDRESS: "0x301Bf7d1738356C23916F82213eB8D1Ef50b38fd",
+    SCAN_LINK: "https://rinkeby.etherscan.io/address/0x301bf7d1738356c23916f82213eb8d1ef50b38fd",
     NETWORK: {
-      NAME: "",
-      SYMBOL: "",
-      ID: 0,
+      NAME: "Ethereum",
+      SYMBOL: "ETH",
+      ID: 4,
     },
-    NFT_NAME: "Recon Rams NFT",
-    SYMBOL: "",
-    MAX_SUPPLY: 1,
-    WEI_COST: 0,
-    DISPLAY_COST: 0,
-    GAS_LIMIT: 0,
-    MARKETPLACE: "",
-    MARKETPLACE_LINK: "",
+    NFT_NAME: "Recon Rams TEST",
+    SYMBOL: "RRTEST",
+    MAX_SUPPLY: 20,
+    WEI_COST: 10000000000000000,
+    DISPLAY_COST: 0.01,
+    GAS_LIMIT: 285000,
+    MARKETPLACE: "OpenSea",
+    MARKETPLACE_LINK: "https://opensea.io/",
     SHOW_BACKGROUND: true,
   });
 
@@ -154,8 +155,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 2) {
-      newMintAmount = 2;
+    if (newMintAmount > 3) {
+      newMintAmount = 3;
     }
     setMintAmount(newMintAmount);
   };
@@ -202,7 +203,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              {data.totalSupply + 1000} / {CONFIG.MAX_SUPPLY}
+              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
@@ -221,7 +222,7 @@ function App() {
                 <s.TextDescription
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  {CONFIG.NFT_NAME} available now on 
+                  {CONFIG.NFT_NAME} available now on: 
                 </s.TextDescription>
                 <s.SpacerSmall />
                 <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>

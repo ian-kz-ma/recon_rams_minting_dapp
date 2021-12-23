@@ -120,10 +120,14 @@ function App() {
     let totalGasLimit = String(gasLimit * mintAmount);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
+
+    //TEST WHITELIST MINT
+    let proof = ["0xa5ab5c66824b2aaf839cf979c50a91ab8edabe0c13f3674169ec623cba289e3d"];
+
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .mint(mintAmount)
+      .mint(mintAmount, proof)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,

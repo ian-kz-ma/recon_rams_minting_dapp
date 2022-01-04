@@ -125,33 +125,29 @@ function App() {
 
     console.log("PROOF: ", proof.message);
 
-
-    //TEST WHITELIST MINT
-    //let proof = ["0xa5ab5c66824b2aaf839cf979c50a91ab8edabe0c13f3674169ec623cba289e3d"];
-
-    // setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
-    // setClaimingNft(true);
-    // blockchain.smartContract.methods
-    //   .mint(mintAmount, proof.message)
-    //   .send({
-    //     gasLimit: String(totalGasLimit),
-    //     to: CONFIG.CONTRACT_ADDRESS,
-    //     from: blockchain.account,
-    //     value: totalCostWei,
-    //   })
-    //   .once("error", (err) => {
-    //     console.log(err);
-    //     setFeedback("Sorry, something went wrong please try again later.");
-    //     setClaimingNft(false);
-    //   })
-    //   .then((receipt) => {
-    //     console.log(receipt);
-    //     setFeedback(
-    //       `Successfully minted ${CONFIG.NFT_NAME}!`
-    //     );
-    //     setClaimingNft(false);
-    //     dispatch(fetchData(blockchain.account));
-    //   });
+    setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
+    setClaimingNft(true);
+    blockchain.smartContract.methods
+      .mint(mintAmount, proof.message)
+      .send({
+        gasLimit: String(totalGasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: blockchain.account,
+        value: totalCostWei,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setFeedback(
+          `Successfully minted ${CONFIG.NFT_NAME}!`
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+      });
   };
 
   const getProof = async () => {

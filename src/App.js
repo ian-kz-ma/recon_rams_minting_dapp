@@ -94,6 +94,7 @@ function App() {
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(`Select the amount of Recon Rams to mint:`);
   const [mintAmount, setMintAmount] = useState(1);
+  const [proof, setProof] = useState(null);
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "0x301Bf7d1738356C23916F82213eB8D1Ef50b38fd",
     SCAN_LINK: "https://rinkeby.etherscan.io/address/0x301bf7d1738356c23916f82213eb8d1ef50b38fd",
@@ -118,35 +119,51 @@ function App() {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
     let totalGasLimit = String(gasLimit * mintAmount);
-    console.log("Cost: ", totalCostWei);
-    console.log("Gas limit: ", totalGasLimit);
+
+    //console.log("Cost: ", totalCostWei);
+    //console.log("Gas limit: ", totalGasLimit);
+
+    console.log("PROOF: ", proof.message);
+
 
     //TEST WHITELIST MINT
-    let proof = ["0xa5ab5c66824b2aaf839cf979c50a91ab8edabe0c13f3674169ec623cba289e3d"];
+    //let proof = ["0xa5ab5c66824b2aaf839cf979c50a91ab8edabe0c13f3674169ec623cba289e3d"];
 
-    setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
-    setClaimingNft(true);
-    blockchain.smartContract.methods
-      .mint(mintAmount, proof)
-      .send({
-        gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
-        from: blockchain.account,
-        value: totalCostWei,
-      })
-      .once("error", (err) => {
-        console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
-        setClaimingNft(false);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        setFeedback(
-          `Successfully minted ${CONFIG.NFT_NAME}!`
-        );
-        setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
-      });
+    // setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
+    // setClaimingNft(true);
+    // blockchain.smartContract.methods
+    //   .mint(mintAmount, proof.message)
+    //   .send({
+    //     gasLimit: String(totalGasLimit),
+    //     to: CONFIG.CONTRACT_ADDRESS,
+    //     from: blockchain.account,
+    //     value: totalCostWei,
+    //   })
+    //   .once("error", (err) => {
+    //     console.log(err);
+    //     setFeedback("Sorry, something went wrong please try again later.");
+    //     setClaimingNft(false);
+    //   })
+    //   .then((receipt) => {
+    //     console.log(receipt);
+    //     setFeedback(
+    //       `Successfully minted ${CONFIG.NFT_NAME}!`
+    //     );
+    //     setClaimingNft(false);
+    //     dispatch(fetchData(blockchain.account));
+    //   });
+  };
+
+  const getProof = async () => {
+    const merkleResponse = await fetch(`/api/merkle?address=${blockchain.account}`, {
+      headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+    })
+    .then((res) => res.json());
+
+    setProof(merkleResponse);
   };
 
   const decrementMintAmount = () => {
@@ -185,6 +202,10 @@ function App() {
   useEffect(() => {
     getConfig();
   }, []);
+
+  useEffect(() => {
+    getProof();
+  }, [blockchain.account]);
 
   useEffect(() => {
     getData();
@@ -258,6 +279,7 @@ function App() {
                         e.preventDefault();
                         dispatch(connect());
                         getData();
+                        getProof();
                       }}
                     >
                       CONNECT

@@ -4,7 +4,7 @@ import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
 import styled from "styled-components";
-import merkleHandler from "./merkleHandler.js";
+import * as merkle from "./merkleHandler.js";
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
@@ -90,12 +90,15 @@ export const StyledLink = styled.a`
 
 function App() {
   const dispatch = useDispatch();
+  const presaleOnlyActive = true; 
+
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(`Select the amount of Recon Rams to mint:`);
   const [mintAmount, setMintAmount] = useState(1);
   const [proof, setProof] = useState(null);
+
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "0x301Bf7d1738356C23916F82213eB8D1Ef50b38fd",
     SCAN_LINK: "https://rinkeby.etherscan.io/address/0x301bf7d1738356c23916f82213eb8d1ef50b38fd",
@@ -124,7 +127,7 @@ function App() {
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .mint(mintAmount, proof.message)
+      .mint(mintAmount, proof)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -147,15 +150,9 @@ function App() {
   };
 
   const getProof = async () => {
-    const merkleResponse = await fetch(`/api/merkle?address=${blockchain.account}`, {
-      headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-    })
-    .then((res) => res.json());
+    var merkleProof = await merkle.getMerkleProof(blockchain.account);
 
-    setProof(merkleResponse);
+    setProof(merkleProof);
   };
 
   const decrementMintAmount = () => {
@@ -271,7 +268,7 @@ function App() {
                         e.preventDefault();
                         dispatch(connect());
                         getData();
-                        //getProof();
+                        getProof();
                       }}
                     >
                       CONNECT

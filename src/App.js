@@ -114,7 +114,7 @@ function App() {
     SHOW_BACKGROUND: true,
   });
 
-  const claimNFTs = () => {
+  const mint = () => {
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * mintAmount);
@@ -328,7 +328,7 @@ function App() {
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
-                          claimNFTs();
+                          mint();
                           getData();
                         }}
                       >

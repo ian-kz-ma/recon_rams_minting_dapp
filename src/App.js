@@ -168,9 +168,14 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 3) {
+
+    if (newMintAmount > 3 && presaleOnlyActive == false) {
       newMintAmount = 3;
     }
+    else if (newMintAmount > 2 && presaleOnlyActive == true) {
+      newMintAmount = 2;
+    }
+
     setMintAmount(newMintAmount);
   };
 

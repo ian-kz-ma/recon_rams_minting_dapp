@@ -119,6 +119,8 @@ function App() {
     SHOW_BACKGROUND: true
   });
 
+  var presaleOnlyActive;
+
   const mint = () => {
     let cost = CONFIG.WEI_COST;
     let gasLimit = CONFIG.GAS_LIMIT;
@@ -176,8 +178,6 @@ function App() {
     }
   };
 
-  const presaleOnlyActive = true;
-
   const getProof = async () => {
     var merkleProof = await merkle.getMerkleProof(blockchain.account);
     setProof(merkleProof);
@@ -219,9 +219,38 @@ function App() {
     SET_CONFIG(config);
   };
 
+  //Fetch the presale state of the contract on websiteload
+  useEffect(() => {
+    const getPreSaleVal = async () => {
+      const Web3EthContract = require("web3-eth-contract");
+      Web3EthContract.setProvider(window.ethereum);
+
+      const abiResponse = await fetch("/config/abi.json", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      const abi = await abiResponse.json();
+      const configResponse = await fetch("/config/config.json", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      const CONFIG = await configResponse.json();
+      const myContract = new Web3EthContract(abi, CONFIG.CONTRACT_ADDRESS);
+      presaleOnlyActive = await myContract.methods.presaleOnlyActive().call();
+
+      console.log(presaleOnlyActive);
+    };
+
+    getPreSaleVal();
+  }, []);
+
   useEffect(() => {
     getConfig();
-  }, [blockchain.smartContract]);
+  }, []);
 
   useEffect(() => {
     getProof();

@@ -128,8 +128,9 @@ function App() {
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     
-    blockchain.smartContract.methods
-      .mint(mintAmount, proof)
+    if(presaleOnlyActive == true) {
+      blockchain.smartContract.methods
+      .whitelistMint(mintAmount, proof)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -149,6 +150,30 @@ function App() {
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
       });
+    }
+    else {
+      blockchain.smartContract.methods
+      .publicMint(mintAmount)
+      .send({
+        gasLimit: String(totalGasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: blockchain.account,
+        value: totalCostWei,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setFeedback(
+          `Successfully minted ${CONFIG.NFT_NAME}!`
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+      });
+    }
   };
 
   const presaleOnlyActive = true;
@@ -168,14 +193,12 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-
     if (newMintAmount > 3 && presaleOnlyActive == false) {
       newMintAmount = 3;
     }
     else if (newMintAmount > 2 && presaleOnlyActive == true) {
       newMintAmount = 2;
     }
-
     setMintAmount(newMintAmount);
   };
 

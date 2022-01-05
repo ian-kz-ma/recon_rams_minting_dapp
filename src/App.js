@@ -127,6 +127,7 @@ function App() {
 
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
+    
     blockchain.smartContract.methods
       .mint(mintAmount, proof)
       .send({
@@ -149,9 +150,6 @@ function App() {
         dispatch(fetchData(blockchain.account));
       });
   };
-
-  // const presaleOnlyActive = blockchain.smartContract.methods
-  //   .presaleOnlyActive();
 
   const presaleOnlyActive = true;
 

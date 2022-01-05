@@ -23,3 +23,15 @@ export function getMerkleProof(senderAddress) {
     return hexProof;
 } 
 
+export function isWhiteListed(senderAddress) {
+    const hash_address = keccak256(senderAddress);
+    const hexProof = merkleTree.getHexProof(hash_address);
+
+    if (Array.isArray(hexProof) && hexProof.length === 0){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
+

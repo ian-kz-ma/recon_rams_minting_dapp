@@ -28,6 +28,9 @@ export const StyledButton = styled.button`
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
   }
+  :disabled {
+    background-color: var(--disabledButton);
+  }
 `;
 
 export const StyledRoundButton = styled.button`
@@ -90,8 +93,6 @@ export const StyledLink = styled.a`
 
 function App() {
   const dispatch = useDispatch();
-  const presaleOnlyActive = true; 
-
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
@@ -100,8 +101,8 @@ function App() {
   const [proof, setProof] = useState(null);
 
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "0x301Bf7d1738356C23916F82213eB8D1Ef50b38fd",
-    SCAN_LINK: "https://rinkeby.etherscan.io/address/0x301bf7d1738356c23916f82213eb8d1ef50b38fd",
+    CONTRACT_ADDRESS: "0x75D791f5b3528c5C72321BF34ef5dDb209A5DBa9",
+    SCAN_LINK: "https://goerli.etherscan.io/address/0x75d791f5b3528c5c72321bf34ef5ddb209a5dba9",
     NETWORK: {
       NAME: "Ethereum",
       SYMBOL: "ETH",
@@ -115,7 +116,7 @@ function App() {
     GAS_LIMIT: 285000,
     MARKETPLACE: "OpenSea",
     MARKETPLACE_LINK: "https://opensea.io/",
-    SHOW_BACKGROUND: true,
+    SHOW_BACKGROUND: true
   });
 
   const mint = () => {
@@ -149,11 +150,15 @@ function App() {
       });
   };
 
+  // const presaleOnlyActive = blockchain.smartContract.methods
+  //   .presaleOnlyActive();
+
+  const presaleOnlyActive = true;
+
   const getProof = async () => {
     var merkleProof = await merkle.getMerkleProof(blockchain.account);
-
     setProof(merkleProof);
-  };
+  }; 
 
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
@@ -190,7 +195,7 @@ function App() {
 
   useEffect(() => {
     getConfig();
-  }, []);
+  }, [blockchain.smartContract]);
 
   useEffect(() => {
     getProof();
@@ -245,6 +250,22 @@ function App() {
               </>
             ) : (
               <>
+              {presaleOnlyActive && blockchain.account && !merkle.isWhiteListed(blockchain.account) ? (
+                  <>
+                    <s.SpacerSmall />
+                    <s.TextTitle
+                    style={{
+                      textAlign: "center",
+                      fontSize: 40,
+                      fontWeight: "bold",
+                      color: "var(--accent-text)",
+                    }}
+                  >
+                    You are not whitelisted!
+                  </s.TextTitle>
+                  </>
+                ) : null}
+                
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
@@ -323,7 +344,7 @@ function App() {
                     </s.MintAmtContainer>
                     <s.MintButtonContainer ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton
-                        disabled={claimingNft ? 1 : 0}
+                        disabled={claimingNft || (presaleOnlyActive && !merkle.isWhiteListed(blockchain.account))}
                         onClick={(e) => {
                           e.preventDefault();
                           mint();

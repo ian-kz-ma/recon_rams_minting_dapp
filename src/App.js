@@ -99,6 +99,7 @@ function App() {
   const [feedback, setFeedback] = useState(`Select the amount of Recon Rams to mint:`);
   const [mintAmount, setMintAmount] = useState(1);
   const [proof, setProof] = useState(null);
+  const [presaleOnlyActive, setPresale] = useState(null);
 
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "0x75D791f5b3528c5C72321BF34ef5dDb209A5DBa9",
@@ -118,8 +119,6 @@ function App() {
     MARKETPLACE_LINK: "https://opensea.io/",
     SHOW_BACKGROUND: true
   });
-
-  var presaleOnlyActive;
 
   const mint = () => {
     let cost = CONFIG.WEI_COST;
@@ -219,32 +218,31 @@ function App() {
     SET_CONFIG(config);
   };
 
-  //Fetch the presale state of the contract on websiteload
+  const getPreSaleVal = async () => {
+    const Web3EthContract = require("web3-eth-contract");
+    Web3EthContract.setProvider(window.ethereum);
+
+    const abiResponse = await fetch("/config/abi.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const abi = await abiResponse.json();
+    const configResponse = await fetch("/config/config.json", {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const CONFIG = await configResponse.json();
+    const myContract = new Web3EthContract(abi, CONFIG.CONTRACT_ADDRESS);
+    const saleState = await myContract.methods.presaleOnlyActive().call();
+
+    setPresale(saleState);
+  };
+
   useEffect(() => {
-    const getPreSaleVal = async () => {
-      const Web3EthContract = require("web3-eth-contract");
-      Web3EthContract.setProvider(window.ethereum);
-
-      const abiResponse = await fetch("/config/abi.json", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      const abi = await abiResponse.json();
-      const configResponse = await fetch("/config/config.json", {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      });
-      const CONFIG = await configResponse.json();
-      const myContract = new Web3EthContract(abi, CONFIG.CONTRACT_ADDRESS);
-      presaleOnlyActive = await myContract.methods.presaleOnlyActive().call();
-
-      console.log(presaleOnlyActive);
-    };
-
     getPreSaleVal();
   }, []);
 

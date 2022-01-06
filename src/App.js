@@ -6,9 +6,6 @@ import * as s from "./styles/globalStyles";
 import styled from "styled-components";
 import * as merkle from "./merkleHandler.js";
 
-const truncate = (input, len) =>
-  input.length > len ? `${input.substring(0, len)}...` : input;
-
 export const StyledButton = styled.button`
   padding: 10px;
   border-radius: 0px;
@@ -218,7 +215,7 @@ function App() {
     SET_CONFIG(config);
   };
 
-  const getPreSaleVal = async () => {
+  const getPreSaleState = async () => {
     const Web3EthContract = require("web3-eth-contract");
     Web3EthContract.setProvider(window.ethereum);
 
@@ -243,7 +240,7 @@ function App() {
   };
 
   useEffect(() => {
-    getPreSaleVal();
+    getPreSaleState();
   }, []);
 
   useEffect(() => {
@@ -275,7 +272,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              {data.totalSupply} / {CONFIG.MAX_SUPPLY}
+              {data.totalSupply == 0 ? "?" : data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
@@ -343,6 +340,7 @@ function App() {
                         dispatch(connect());
                         getData();
                         getProof();
+                        //getPreSaleState();
                       }}
                     >
                       CONNECT

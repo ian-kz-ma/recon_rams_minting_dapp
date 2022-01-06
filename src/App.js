@@ -340,7 +340,7 @@ function App() {
                         dispatch(connect());
                         getData();
                         getProof();
-                        //getPreSaleState();
+                        getPreSaleState();
                       }}
                     >
                       CONNECT

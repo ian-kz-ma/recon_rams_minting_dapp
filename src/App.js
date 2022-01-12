@@ -108,10 +108,11 @@ function App() {
     },
     NFT_NAME: "Recon Rams TEST",
     SYMBOL: "RRTEST",
-    MAX_SUPPLY: 20,
+    MAX_SUPPLY: 42,
+    PUBLIC_MAX_SUPPLY: 37,
     WEI_COST: 10000000000000000,
     DISPLAY_COST: 0.01,
-    GAS_LIMIT: 285000,
+    GAS_LIMIT: 125000,
     MARKETPLACE: "OpenSea",
     MARKETPLACE_LINK: "https://opensea.io/",
     SHOW_BACKGROUND: true
@@ -281,7 +282,7 @@ function App() {
               }}
             >
             </s.TextDescription>
-            {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+            {Number(data.totalSupply) >= CONFIG.PUBLIC_MAX_SUPPLY ? (
               <>
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}

@@ -8,10 +8,11 @@
   },
   "NFT_NAME": "Recon Rams TEST",
   "SYMBOL": "RRTEST",
-  "MAX_SUPPLY": 20,
+  "MAX_SUPPLY": 42,
+  "PUBLIC_MAX_SUPPLY": 37,
   "WEI_COST": 10000000000000000,
   "DISPLAY_COST": 0.01,
-  "GAS_LIMIT": 285000,
+  "GAS_LIMIT": 125000,
   "MARKETPLACE": "OpeanSea",
   "MARKETPLACE_LINK": "https://opensea.io/",
   "SHOW_BACKGROUND": true

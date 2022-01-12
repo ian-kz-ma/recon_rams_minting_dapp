@@ -119,42 +119,44 @@ function App() {
   });
 
   const mint = () => {
-    let cost = CONFIG.WEI_COST;
-    let gasLimit = CONFIG.GAS_LIMIT;
-    let totalCostWei = String(cost * mintAmount);
-    let totalGasLimit = String(gasLimit * mintAmount);
-
     setFeedback(`Minting your ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
     
     if(presaleOnlyActive == true) {
-      blockchain.smartContract.methods
-      .whitelistMint(mintAmount, proof)
-      .send({
-        gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
-        from: blockchain.account,
-        value: totalCostWei,
-      })
-      .once("error", (err) => {
-        console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
-        setClaimingNft(false);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        setFeedback(
-          `Successfully minted ${CONFIG.NFT_NAME}!`
-        );
-        setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
-      });
+      whitelistMint();
     }
     else {
-      blockchain.smartContract.methods
+      publicMint();
+    }
+  };
+
+  const publicMint = async () => {
+    let cost = CONFIG.WEI_COST;
+    let totalCostWei = String(cost * mintAmount);
+    let estimatedGas, gasLimit;
+
+    try {
+      estimatedGas = await blockchain.smartContract.methods.publicMint(mintAmount)
+      .estimateGas(
+        {
+            from: blockchain.account,
+            gas: CONFIG.GAS_LIMIT,
+            value: totalCostWei
+        }
+      );
+    } catch(err) {
+      console.log(err);
+      alert('Error while attempting to mint. Please try again later.');
+      return;
+    }
+
+    //Set gas limit to 1.2x the estimate
+    gasLimit = Math.round(estimatedGas * 1.2);
+
+    blockchain.smartContract.methods
       .publicMint(mintAmount)
       .send({
-        gasLimit: String(totalGasLimit),
+        gasLimit: String(gasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
         from: blockchain.account,
         value: totalCostWei,
@@ -172,8 +174,53 @@ function App() {
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
       });
+  }
+
+  const whitelistMint = async () => {
+    let cost = CONFIG.WEI_COST;
+    let totalCostWei = String(cost * mintAmount);
+    let estimatedGas, gasLimit;
+
+    try {
+      estimatedGas = await blockchain.smartContract.methods.whitelistMint(mintAmount, proof)
+      .estimateGas(
+        {
+            from: blockchain.account,
+            gas: CONFIG.GAS_LIMIT,
+            value: totalCostWei
+        }
+      );
+    } catch(err) {
+      console.log(err);
+      alert('Error while attempting to mint. Please try again later.');
+      return;
     }
-  };
+
+    //Set gas limit to 1.2x the estimate
+    gasLimit = Math.round(estimatedGas * 1.2);
+
+    blockchain.smartContract.methods
+      .whitelistMint(mintAmount, proof)
+      .send({
+        gasLimit: String(gasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: blockchain.account,
+        value: totalCostWei,
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setFeedback(
+          `Successfully minted ${CONFIG.NFT_NAME}!`
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+      });
+  }
 
   const getProof = async () => {
     var merkleProof = await merkle.getMerkleProof(blockchain.account);
@@ -234,8 +281,8 @@ function App() {
       },
     });
     const CONFIG = await configResponse.json();
-    const myContract = new Web3EthContract(abi, CONFIG.CONTRACT_ADDRESS);
-    const saleState = await myContract.methods.presaleOnlyActive().call();
+    const rrContract = new Web3EthContract(abi, CONFIG.CONTRACT_ADDRESS);
+    const saleState = await rrContract.methods.presaleOnlyActive().call();
 
     setPresale(saleState);
   };

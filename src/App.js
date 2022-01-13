@@ -13,9 +13,10 @@ export const StyledButton = styled.button`
   background-color: var(--primary);
   padding: 10px;
   font-weight: bold;
+  font-size: 25px;
   color: var(--primary-text);
-  width: 100px;
-  height: 50px;
+  width: 150px;
+  height: 70px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -30,16 +31,16 @@ export const StyledButton = styled.button`
   }
 `;
 
-export const StyledRoundButton = styled.button`
+export const StyledSquareButton = styled.button`
   padding: 10px;
   border-radius: 0px;
   border: none;
   background-color: var(--primary);
   padding: 10px;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 35px;
   color: var(--primary-text);
-  width: 50px;
+  width: 60px;
   height: 50px;
   cursor: pointer;
   display: flex;
@@ -411,7 +412,7 @@ function App() {
                   <>
                     <s.SpacerMedium />
                     <s.MintAmtContainer ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledRoundButton
+                      <StyledSquareButton
                         style={{ lineHeight: 0.4 }}
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
@@ -420,7 +421,7 @@ function App() {
                         }}
                       >
                         -
-                      </StyledRoundButton>
+                      </StyledSquareButton>
                       <s.SpacerMedium />
                       <s.MintAmtTextDescription
                         style={{
@@ -431,7 +432,7 @@ function App() {
                         {mintAmount}
                       </s.MintAmtTextDescription>
                       <s.SpacerMedium />
-                      <StyledRoundButton
+                      <StyledSquareButton
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
@@ -439,7 +440,7 @@ function App() {
                         }}
                       >
                         +
-                      </StyledRoundButton>
+                      </StyledSquareButton>
                     </s.MintAmtContainer>
                     <s.MintButtonContainer ai={"center"} jc={"center"} fd={"row"}>
                       <StyledButton

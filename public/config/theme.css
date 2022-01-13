@@ -1,9 +1,10 @@
 :root {
-  --primary: #745004;
-  --primary-text: #000000;
+  --primary: #d14d39;
+  --primary-text: #ffffff;
   --secondary: #000000;
   --secondary-text: #000000;
   --accent: rgba(0, 0, 0, 0);
   --accent-text: #000000;
   --disabledButton: #64646442;
 }
+

@@ -147,7 +147,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. You may have minted your max allowed amount, or the total mints after tx exceeds max mints for this address');
+      alert('Error while attempting to mint. You may have insufficient funds, minted your max allowed WL amount, or the total mints after tx exceeds max WL mints for this address');
       setClaimingNft(false);
       return;
     }
@@ -194,7 +194,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. You may have minted your max allowed amount, or the total mints after tx exceeds max mints for this address');
+      alert('Error while attempting to mint. You may have insufficient funds, minted your max allowed WL amount, or the total mints after tx exceeds max WL mints for this address');
       setClaimingNft(false);
       return;
     }

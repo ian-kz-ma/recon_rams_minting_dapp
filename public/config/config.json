@@ -1,17 +1,17 @@
 {
-  "CONTRACT_ADDRESS": "0x522c7f9ea9853D088Efd428E2BF420fBbf0A9fd3",
-  "SCAN_LINK": "https://goerli.etherscan.io/address/0x522c7f9ea9853D088Efd428E2BF420fBbf0A9fd3",
+  "CONTRACT_ADDRESS": "0x79d4F3687aF0951a156a295F001FbE0870E8cF9a",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x79d4f3687af0951a156a295f001fbe0870e8cf9a",
   "NETWORK": {
     "NAME": "Ethereum",
     "SYMBOL": "ETH",
-    "ID": 5
+    "ID": 4
   },
   "NFT_NAME": "Recon Rams TEST",
   "SYMBOL": "RRTEST",
   "MAX_SUPPLY": 42,
   "PUBLIC_MAX_SUPPLY": 37,
   "WEI_COST": 10000000000000000,
-  "DISPLAY_COST": 0.01,
+  "DISPLAY_COST": 0.077,
   "GAS_LIMIT": 125000,
   "MARKETPLACE": "OpeanSea",
   "MARKETPLACE_LINK": "https://opensea.io/",

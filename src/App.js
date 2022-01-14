@@ -100,8 +100,8 @@ function App() {
   const [presaleOnlyActive, setPresale] = useState(null);
 
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "0x75D791f5b3528c5C72321BF34ef5dDb209A5DBa9",
-    SCAN_LINK: "https://goerli.etherscan.io/address/0x75d791f5b3528c5c72321bf34ef5ddb209a5dba9",
+    CONTRACT_ADDRESS: "0x67E1c8f46Eb701ae34220C21fEb045df19Ef5Df5",
+    SCAN_LINK: "https://goerli.etherscan.io/address/0x67E1c8f46Eb701ae34220C21fEb045df19Ef5Df5",
     NETWORK: {
       NAME: "Ethereum",
       SYMBOL: "ETH",

@@ -147,7 +147,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. You may have insufficient funds, mint amount exceeds total supply, minted your max allowed WL amount, or the total mints after tx exceeds max WL mints for this address');
+      alert('Error while attempting to mint. The following reasons may apply:\n You may have insufficient funds\n Mint amount exceeds total supply\n You minted your max allowed WL amount\n The total mints after tx exceeds max WL mints for this address');
       setClaimingNft(false);
       return;
     }
@@ -194,7 +194,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. You may have insufficient funds, mint amount exceeds total supply, minted your max allowed WL amount, or the total mints after tx exceeds max WL mints for this address');
+      alert('Error while attempting to mint. The following reasons may apply:\n You may have insufficient funds\n Mint amount exceeds total supply\n You minted your max allowed WL amount\n The total mints after tx exceeds max WL mints for this address');
       setClaimingNft(false);
       return;
     }
@@ -240,8 +240,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 3 && presaleOnlyActive == false) {
-      newMintAmount = 3;
+    if (newMintAmount > 7 && presaleOnlyActive == false) {
+      newMintAmount = 7;
     }
     else if (newMintAmount > 2 && presaleOnlyActive == true) {
       newMintAmount = 2;

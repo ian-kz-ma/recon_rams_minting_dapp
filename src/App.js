@@ -84,7 +84,7 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledLink = styled.a`
-  color: var(--secondary);
+  color: var(--link-text);
   text-decoration: none;
   font-size: 30px;
 `;
@@ -107,8 +107,8 @@ function App() {
       SYMBOL: "ETH",
       ID: 4,
     },
-    NFT_NAME: "Recon Rams TEST",
-    SYMBOL: "RRTEST",
+    NFT_NAME: "Recon Rams NFT",
+    SYMBOL: "RR",
     MAX_SUPPLY: 42,
     PUBLIC_MAX_SUPPLY: 37,
     WEI_COST: 10000000000000000,
@@ -147,7 +147,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. You may have insufficient funds, minted your max allowed WL amount, or the total mints after tx exceeds max WL mints for this address');
+      alert('Error while attempting to mint. You may have insufficient funds, mint amount exceeds total supply, minted your max allowed WL amount, or the total mints after tx exceeds max WL mints for this address');
       setClaimingNft(false);
       return;
     }
@@ -194,7 +194,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. You may have insufficient funds, minted your max allowed WL amount, or the total mints after tx exceeds max WL mints for this address');
+      alert('Error while attempting to mint. You may have insufficient funds, mint amount exceeds total supply, minted your max allowed WL amount, or the total mints after tx exceeds max WL mints for this address');
       setClaimingNft(false);
       return;
     }

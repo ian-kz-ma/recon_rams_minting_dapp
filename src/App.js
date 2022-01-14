@@ -115,7 +115,7 @@ function App() {
     DISPLAY_COST: 0.077,
     GAS_LIMIT: 125000,
     MARKETPLACE: "OpenSea",
-    MARKETPLACE_LINK: "https://opensea.io/",
+    MARKETPLACE_LINK: "https://testnets.opensea.io/collection/rrtest3",
     SHOW_BACKGROUND: true
   });
 
@@ -147,7 +147,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. Please try again later.');
+      alert('Error while attempting to mint. You may have minted your max allowed amount, or the total mints after tx exceeds max mints for this address');
       return;
     }
 
@@ -193,7 +193,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. You may have minted your max allowed amount.');
+      alert('Error while attempting to mint. You may have minted your max allowed amount, or the total mints after tx exceeds max mints for this address');
       return;
     }
 

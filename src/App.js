@@ -115,7 +115,7 @@ function App() {
     DISPLAY_COST: 0.01,
     GAS_LIMIT: 125000,
     MARKETPLACE: "OpenSea",
-    MARKETPLACE_LINK: "https://testnets.opensea.io/collection/rrtest3",
+    MARKETPLACE_LINK: "https://testnets.opensea.io/collection/reconramdegens",
     SHOW_BACKGROUND: true
   });
 

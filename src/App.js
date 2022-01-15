@@ -100,8 +100,8 @@ function App() {
   const [presaleOnlyActive, setPresale] = useState(null);
 
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "0x86333A498Ab0E1489414Beb67CEc60a7396C72a7",
-    SCAN_LINK: "https://rinkeby.etherscan.io/address/0x20d7b5876f2DFf36BacBB86EA46ecCFa95655c42",
+    CONTRACT_ADDRESS: "0x8a7da59898e961c7084a88fbd0fc279fa9f11fdc",
+    SCAN_LINK: "https://goerli.etherscan.io/address/0x8a7da59898e961c7084a88fbd0fc279fa9f11fdc",
     NETWORK: {
       NAME: "Ethereum",
       SYMBOL: "ETH",
@@ -147,7 +147,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. The following reasons may apply:\n You may have insufficient funds\n Mint amount exceeds total supply\n You minted your max allowed WL amount\n The total mints after tx exceeds max WL mints for this address');
+      alert(err.message);
       setClaimingNft(false);
       return;
     }
@@ -194,7 +194,7 @@ function App() {
       );
     } catch(err) {
       console.log(err);
-      alert('Error while attempting to mint. The following reasons may apply:\n You may have insufficient funds\n Mint amount exceeds total supply\n You minted your max allowed WL amount\n The total mints after tx exceeds max WL mints for this address');
+      alert(err.message);
       setClaimingNft(false);
       return;
     }

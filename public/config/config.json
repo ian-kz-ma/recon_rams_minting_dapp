@@ -1,6 +1,6 @@
 {
-  "CONTRACT_ADDRESS": "0x86333A498Ab0E1489414Beb67CEc60a7396C72a7",
-  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x86333A498Ab0E1489414Beb67CEc60a7396C72a7",
+  "CONTRACT_ADDRESS": "0x20d7b5876f2DFf36BacBB86EA46ecCFa95655c42",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0x20d7b5876f2DFf36BacBB86EA46ecCFa95655c42",
   "NETWORK": {
     "NAME": "Ethereum",
     "SYMBOL": "ETH",
@@ -12,7 +12,7 @@
   "PUBLIC_MAX_SUPPLY": 37,
   "WEI_COST": 10000000000000000,
   "DISPLAY_COST": 0.01,
-  "GAS_LIMIT": 125000,
+  "GAS_LIMIT": 400000,
   "MARKETPLACE": "OpeanSea",
   "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/reconramdegens",
   "SHOW_BACKGROUND": true

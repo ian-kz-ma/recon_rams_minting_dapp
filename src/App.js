@@ -323,7 +323,7 @@ function App() {
                 color: "var(--accent-text)",
               }}
             >
-              {data.totalSupply == 0 ? "?" : data.totalSupply} / {CONFIG.MAX_SUPPLY}
+              {data.totalSupply == CONFIG.PUBLIC_MAX_SUPPLY ? CONFIG.MAX_SUPPLY : data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
@@ -335,9 +335,9 @@ function App() {
             {Number(data.totalSupply) >= CONFIG.PUBLIC_MAX_SUPPLY ? (
               <>
                 <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                  style={{ textAlign: "center", color: "var(--accent-text)", fontSize: 50, fontWeight: "bold" }}
                 >
-                  The sale has ended.
+                  SOLD OUT!
                 </s.TextTitle>
                 <s.TextDescription
                   style={{ textAlign: "center", color: "var(--accent-text)" }}

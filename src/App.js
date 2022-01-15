@@ -100,8 +100,8 @@ function App() {
   const [presaleOnlyActive, setPresale] = useState(null);
 
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "0x79d4f3687af0951a156a295f001fbe0870e8cf9a",
-    SCAN_LINK: "https://rinkeby.etherscan.io/address/0x79d4f3687af0951a156a295f001fbe0870e8cf9a",
+    CONTRACT_ADDRESS: "0x86333A498Ab0E1489414Beb67CEc60a7396C72a7",
+    SCAN_LINK: "https://rinkeby.etherscan.io/address/0x86333A498Ab0E1489414Beb67CEc60a7396C72a7",
     NETWORK: {
       NAME: "Ethereum",
       SYMBOL: "ETH",
@@ -112,7 +112,7 @@ function App() {
     MAX_SUPPLY: 42,
     PUBLIC_MAX_SUPPLY: 37,
     WEI_COST: 10000000000000000,
-    DISPLAY_COST: 0.077,
+    DISPLAY_COST: 0.01,
     GAS_LIMIT: 125000,
     MARKETPLACE: "OpenSea",
     MARKETPLACE_LINK: "https://testnets.opensea.io/collection/rrtest3",

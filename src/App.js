@@ -309,6 +309,7 @@ function App() {
   return (
     <s.Screen>
       <s.BgContainer
+        style={{ padding: 24, backgroundColor: "var(--solidbg)" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
       >
         <s.SpacerSmall />

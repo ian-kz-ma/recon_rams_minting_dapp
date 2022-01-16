@@ -15,5 +15,5 @@
   "GAS_LIMIT": 400000,
   "MARKETPLACE": "OpeanSea",
   "MARKETPLACE_LINK": "https://testnets.opensea.io/collection/reconramdegens",
-  "SHOW_BACKGROUND": true
+  "SHOW_BACKGROUND": false
 }

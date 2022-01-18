@@ -309,7 +309,7 @@ function App() {
   return (
     <s.Screen>
       <s.BgContainer
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
+        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <s.SpacerSmall />
           <s.SpacerLarge />

@@ -16,7 +16,7 @@ export const StyledButton = styled.button`
   font-size: 25px;
   color: var(--primary-text);
   width: 150px;
-  height: 70px;
+  height: 60px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -41,7 +41,7 @@ export const StyledSquareButton = styled.button`
   font-size: 35px;
   color: var(--primary-text);
   width: 60px;
-  height: 50px;
+  height: 40px;
   cursor: pointer;
   display: flex;
   align-items: center;

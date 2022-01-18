@@ -368,7 +368,7 @@ function App() {
                 ) : null}
                 
                 <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                  style={{ textAlign: "center", color: "var(--accent-text)", fontSize: 20}}
                 >
                   COST PER: {CONFIG.DISPLAY_COST}{" "}
                   {CONFIG.NETWORK.SYMBOL}

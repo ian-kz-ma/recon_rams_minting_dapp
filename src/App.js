@@ -16,7 +16,7 @@ export const StyledButton = styled.button`
   font-size: 25px;
   color: var(--primary-text);
   width: 150px;
-  height: 60px;
+  height: 70px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -41,7 +41,7 @@ export const StyledSquareButton = styled.button`
   font-size: 35px;
   color: var(--primary-text);
   width: 60px;
-  height: 40px;
+  height: 50px;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -445,6 +445,7 @@ function App() {
                       </StyledSquareButton>
                     </s.MintAmtContainer>
                     <s.MintButtonContainer ai={"center"} jc={"center"} fd={"row"}>
+                    <s.SpacerMedium />
                       <StyledButton
                         disabled={claimingNft || (presaleOnlyActive && !merkle.isWhiteListed(blockchain.account))}
                         onClick={(e) => {

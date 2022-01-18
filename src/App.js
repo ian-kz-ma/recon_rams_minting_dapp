@@ -8,15 +8,15 @@ import * as merkle from "./merkleHandler.js";
 
 export const StyledButton = styled.button`
   padding: 10px;
+  margin-top: 18px;
   border-radius: 0px;
   border: none;
   background-color: var(--primary);
-  padding: 10px;
   font-weight: bold;
   font-size: 25px;
   color: var(--primary-text);
   width: 150px;
-  height: 70px;
+  height: 75px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -314,7 +314,6 @@ function App() {
         <s.SpacerSmall />
           <s.SpacerLarge />
           <s.MainContainer>
-            <s.SpacerSmall />
             <s.TextTitle
               style={{
                 textAlign: "center",
@@ -357,7 +356,7 @@ function App() {
                     <s.TextTitle
                     style={{
                       textAlign: "center",
-                      fontSize: 30,
+                      fontSize: 27,
                       fontWeight: "bold",
                       color: "var(--accent-text)",
                     }}

@@ -173,6 +173,19 @@
 	},
 	{
 		"inputs": [],
+		"name": "AUCTION_LEGENDARIES",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "COST",
 		"outputs": [
 			{
@@ -199,7 +212,20 @@
 	},
 	{
 		"inputs": [],
-		"name": "MAX_PUBLIC_SALE_PER_TX",
+		"name": "MAX_PUBLIC_PER_TX",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "MAX_PUBLIC_PER_WALLET",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -414,6 +440,25 @@
 				"internalType": "bool",
 				"name": "",
 				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "publicAddressMintedBalance",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",

@@ -263,6 +263,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "RR_PROVENANCE_HASH",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",

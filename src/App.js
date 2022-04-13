@@ -94,6 +94,7 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
+  const [feedback, setFeedback] = useState(`Select the amount of NFTs to mint:`);
   const [mintAmount, setMintAmount] = useState(1);
   const [femaleProof, setFemaleProof] = useState(null);
   const [maleProof, setMaleProof] = useState(null);
@@ -390,12 +391,6 @@ function App() {
                     </>
                   ): null }
                 
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)", fontSize: 20}}
-                >
-                  COST PER: {CONFIG.DISPLAY_COST}{" "}
-                  {CONFIG.NETWORK.SYMBOL}
-                </s.TextTitle>
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.AltContainer ai={"center"} jc={"center"}>

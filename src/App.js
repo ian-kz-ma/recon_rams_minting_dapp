@@ -94,7 +94,6 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Select the amount of Recon Rams to mint:`);
   const [mintAmount, setMintAmount] = useState(1);
   const [femaleProof, setFemaleProof] = useState(null);
   const [maleProof, setMaleProof] = useState(null);
@@ -246,11 +245,11 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 7 && presaleOnlyActive == false) {
-      newMintAmount = 7;
+    if (newMintAmount > 1 && presaleOnlyActive == false) {
+      newMintAmount = 1;
     }
-    else if (newMintAmount > 2 && presaleOnlyActive == true) {
-      newMintAmount = 2;
+    else if (newMintAmount > 1 && presaleOnlyActive == true) {
+      newMintAmount = 1;
     }
     setMintAmount(newMintAmount);
   };

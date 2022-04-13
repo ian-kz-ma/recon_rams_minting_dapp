@@ -96,7 +96,8 @@ function App() {
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(`Select the amount of Recon Rams to mint:`);
   const [mintAmount, setMintAmount] = useState(1);
-  const [proof, setProof] = useState(null);
+  const [femaleProof, setFemaleProof] = useState(null);
+  const [maleProof, setMaleProof] = useState(null);
   const [presaleOnlyActive, setPresale] = useState(null);
 
   const [CONFIG, SET_CONFIG] = useState({
@@ -105,14 +106,14 @@ function App() {
     NETWORK: {
       NAME: "Ethereum",
       SYMBOL: "ETH",
-      ID: 1,
+      ID: 4,
     },
-    NFT_NAME: "Recon Rams NFT",
-    SYMBOL: "RR",
-    MAX_SUPPLY: 3990,
-    PUBLIC_MAX_SUPPLY: 3891,
-    WEI_COST: 77000000000000000,
-    DISPLAY_COST: 0.077,
+    NFT_NAME: "Recon Rams Elites",
+    SYMBOL: "RRE",
+    MAX_SUPPLY: 150,
+    PUBLIC_MAX_SUPPLY: 150,
+    WEI_COST: 0,
+    DISPLAY_COST: 0,
     GAS_LIMIT: 2000000,
     MARKETPLACE: "OpenSea",
     MARKETPLACE_LINK: "https://opensea.io/collection/reconramsnft",
@@ -124,20 +125,20 @@ function App() {
     setClaimingNft(true);
     
     if(presaleOnlyActive == true) {
-      whitelistMint();
+      femaleWhitelistMint();
     }
     else {
-      publicMint();
+      maleWhitelistMint();
     }
   };
 
-  const publicMint = async () => {
+  const maleWhitelistMint = async () => {
     let cost = CONFIG.WEI_COST;
     let totalCostWei = String(cost * mintAmount);
     let estimatedGas, gasLimit;
 
     try {
-      estimatedGas = await blockchain.smartContract.methods.publicMint(mintAmount)
+      estimatedGas = await blockchain.smartContract.methods.maleWhitelistMint(mintAmount, maleProof)
       .estimateGas(
         {
             from: blockchain.account,
@@ -156,7 +157,7 @@ function App() {
     gasLimit = Math.round(estimatedGas * 1.2);
 
     blockchain.smartContract.methods
-      .publicMint(mintAmount)
+      .femaleWhitelistMint(mintAmount, maleProof)
       .send({
         gasLimit: String(gasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -178,13 +179,13 @@ function App() {
       });
   }
 
-  const whitelistMint = async () => {
+  const femaleWhitelistMint = async () => {
     let cost = CONFIG.WEI_COST;
     let totalCostWei = String(cost * mintAmount);
     let estimatedGas, gasLimit;
 
     try {
-      estimatedGas = await blockchain.smartContract.methods.whitelistMint(mintAmount, proof)
+      estimatedGas = await blockchain.smartContract.methods.femaleWhitelistMint(mintAmount, femaleProof)
       .estimateGas(
         {
             from: blockchain.account,
@@ -203,7 +204,7 @@ function App() {
     gasLimit = Math.round(estimatedGas * 1.2);
 
     blockchain.smartContract.methods
-      .whitelistMint(mintAmount, proof)
+      .femaleWhitelistMint(mintAmount, femaleProof)
       .send({
         gasLimit: String(gasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -225,9 +226,14 @@ function App() {
       });
   }
 
-  const getProof = async () => {
-    var merkleProof = await merkle.getMerkleProof(blockchain.account);
-    setProof(merkleProof);
+  const getFemaleProof = async () => {
+    var merkleProof = await merkle.getMerkleProofFemale(blockchain.account);
+    setFemaleProof(merkleProof);
+  }; 
+  
+  const getMaleProof = async () => {
+    var merkleProof = await merkle.getMerkleProofMale(blockchain.account);
+    setMaleProof(merkleProof);
   }; 
 
   const decrementMintAmount = () => {
@@ -285,7 +291,7 @@ function App() {
     });
     const CONFIG = await configResponse.json();
     const rrContract = new Web3EthContract(abi, CONFIG.CONTRACT_ADDRESS);
-    const saleState = await rrContract.methods.presaleOnlyActive().call();
+    const saleState = await rrContract.methods.femaleOnlyActive().call();
 
     setPresale(saleState);
   };
@@ -299,7 +305,11 @@ function App() {
   }, []);
 
   useEffect(() => {
-    getProof();
+    getFemaleProof();
+  }, [blockchain.account]);
+
+  useEffect(() => {
+    getMaleProof();
   }, [blockchain.account]);
 
   useEffect(() => {
@@ -350,7 +360,7 @@ function App() {
               </>
             ) : (
               <>
-              {presaleOnlyActive && blockchain.account && !merkle.isWhiteListed(blockchain.account) ? (
+              {presaleOnlyActive && blockchain.account && !merkle.isFemaleListed(blockchain.account) ? (
                   <>
                     <s.SpacerSmall />
                     <s.TextTitle
@@ -364,7 +374,22 @@ function App() {
                     You are not whitelisted!
                   </s.TextTitle>
                   </>
-                ) : null}
+                ) : (!presaleOnlyActive && blockchain.account && !merkle.isMaleListed(blockchain.account))  ? 
+                (
+                    <>
+                      <s.TextTitle
+                      style={{
+                        textAlign: "center",
+                        fontSize: 19,
+                        fontWeight: "bold",
+                        color: "var(--no-wl)",
+                      }}
+                    >
+                      You are not whitelisted!
+                    </s.TextTitle>
+                    <s.SpacerSmall />
+                    </>
+                  ): null }
                 
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)", fontSize: 20}}
@@ -389,7 +414,8 @@ function App() {
                         e.preventDefault();
                         dispatch(connect());
                         getData();
-                        getProof();
+                        getFemaleProof();
+                        getMaleProof();
                         getPreSaleState();
                       }}
                     >
@@ -446,14 +472,14 @@ function App() {
                     <s.MintButtonContainer ai={"center"} jc={"center"} fd={"row"}>
                     <s.SpacerMedium />
                       <StyledButton
-                        disabled={claimingNft || (presaleOnlyActive && !merkle.isWhiteListed(blockchain.account))}
+                        disabled={claimingNft || (presaleOnlyActive && !merkle.isFemaleListed(blockchain.account)) || (!presaleOnlyActive && !merkle.isMaleListed(blockchain.account))}
                         onClick={(e) => {
                           e.preventDefault();
                           mint();
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "BUY"}
+                        {claimingNft ? "BUSY" : "CLAIM"}
                       </StyledButton>
                     </s.MintButtonContainer>
                   </>

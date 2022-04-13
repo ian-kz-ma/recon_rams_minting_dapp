@@ -4,14 +4,14 @@
   "NETWORK": {
     "NAME": "Ethereum",
     "SYMBOL": "ETH",
-    "ID": 1
+    "ID": 4
   },
-  "NFT_NAME": "Recon Rams NFT",
-  "SYMBOL": "RR",
-  "MAX_SUPPLY": 3990,
-  "PUBLIC_MAX_SUPPLY": 3891,
-  "WEI_COST": 77000000000000000,
-  "DISPLAY_COST": 0.077,
+  "NFT_NAME": "Recon Rams Elites",
+  "SYMBOL": "RRE",
+  "MAX_SUPPLY": 150,
+  "PUBLIC_MAX_SUPPLY": 150,
+  "WEI_COST": 0,
+  "DISPLAY_COST": 0,
   "GAS_LIMIT": 2000000,
   "MARKETPLACE": "OpenSea",
   "MARKETPLACE_LINK": "https://opensea.io/collection/reconramsnft",

@@ -125,9 +125,11 @@ function App() {
     setClaimingNft(true);
     
     if(presaleOnlyActive == true) {
+      console.log("female");
       femaleWhitelistMint();
     }
     else {
+      console.log("male");
       maleWhitelistMint();
     }
   };
@@ -157,7 +159,7 @@ function App() {
     gasLimit = Math.round(estimatedGas * 1.2);
 
     blockchain.smartContract.methods
-      .femaleWhitelistMint(mintAmount, maleProof)
+      .maleWhitelistMint(mintAmount, maleProof)
       .send({
         gasLimit: String(gasLimit),
         to: CONFIG.CONTRACT_ADDRESS,

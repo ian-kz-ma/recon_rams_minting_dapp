@@ -9,12 +9,12 @@ import "./styles/reset.css";
 const { MerkleTree } = require('merkletreejs');
 const keccak256 = require('keccak256');
 
-let maleAddresses = [
+let femaleListAddresses = [
     "0x24B775e0d16Ed56C74E7140d0dC7e578e971107B",
     "0x1531D6DdD65F6dCEdaB6fb3b2F5265d15945dFA7"
 ]
 
-let femaleListAddresses = [
+let maleAddresses = [
     "0xB476128E0605666216c1851499B3af562B0CA0fe",
     "0xEC86f9f4034011d7B38D61509110713e76504112"
 ]

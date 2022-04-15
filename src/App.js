@@ -101,8 +101,8 @@ function App() {
   const [presaleOnlyActive, setPresale] = useState(null);
 
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "0x632136Be55A41a11478e9Fa5077cce734B777f67",
-    SCAN_LINK: "https://etherscan.io/address/0x632136be55a41a11478e9fa5077cce734b777f67",
+    CONTRACT_ADDRESS: "0xdfE82856030F31A509966954D221369Af59633D4",
+    SCAN_LINK: "https://rinkeby.etherscan.io/address/0xdfe82856030f31a509966954d221369af59633d4",
     NETWORK: {
       NAME: "Ethereum",
       SYMBOL: "ETH",
@@ -157,7 +157,7 @@ function App() {
     gasLimit = Math.round(estimatedGas * 1.2);
 
     blockchain.smartContract.methods
-      .femaleWhitelistMint(mintAmount, maleProof)
+      .femaleWhitelistMint(mintAmount, femaleProof)
       .send({
         gasLimit: String(gasLimit),
         to: CONFIG.CONTRACT_ADDRESS,

@@ -1,10 +1,10 @@
 {
-  "CONTRACT_ADDRESS": "0xaFb5fAeddcE130dc0E943645D722ee38C3Fc5e2c",
-  "SCAN_LINK": "https://goerli.etherscan.io/address/0xafb5faeddce130dc0e943645d722ee38c3fc5e2c",
+  "CONTRACT_ADDRESS": "0xdfE82856030F31A509966954D221369Af59633D4",
+  "SCAN_LINK": "https://rinkeby.etherscan.io/address/0xdfe82856030f31a509966954d221369af59633d4",
   "NETWORK": {
     "NAME": "Ethereum",
     "SYMBOL": "ETH",
-    "ID": 5
+    "ID": 4
   },
   "NFT_NAME": "Recon Rams Elites",
   "SYMBOL": "RRE",

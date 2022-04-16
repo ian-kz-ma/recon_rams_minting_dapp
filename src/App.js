@@ -101,12 +101,12 @@ function App() {
   const [presaleOnlyActive, setPresale] = useState(null);
 
   const [CONFIG, SET_CONFIG] = useState({
-    CONTRACT_ADDRESS: "0xdfE82856030F31A509966954D221369Af59633D4",
-    SCAN_LINK: "https://rinkeby.etherscan.io/address/0xdfe82856030f31a509966954d221369af59633d4",
+    CONTRACT_ADDRESS: "0x6A68175902905A44504949d68Bf2C54b1CA98Db5",
+    SCAN_LINK: "https://etherscan.io/address/0x6a68175902905a44504949d68bf2c54b1ca98db5",
     NETWORK: {
       NAME: "Ethereum",
       SYMBOL: "ETH",
-      ID: 4,
+      ID: 1,
     },
     NFT_NAME: "Recon Rams Elites",
     SYMBOL: "RRE",
@@ -116,7 +116,7 @@ function App() {
     DISPLAY_COST: 0,
     GAS_LIMIT: 2000000,
     MARKETPLACE: "OpenSea",
-    MARKETPLACE_LINK: "https://opensea.io/collection/reconramsnft",
+    MARKETPLACE_LINK: "https://opensea.io/collection/reconramselites",
     SHOW_BACKGROUND: true
   });
 
